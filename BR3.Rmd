@@ -1,0 +1,459 @@
+---
+title: "BR Chapter 3"
+author: "Steph Jordan"
+output:
+  html_document:
+    df_print: paged
+---
+
+## Excercise 3.1
+
+a. Beta(5, 5) because this represents a bell curve with the mean centered around 0.5. Since the friend first estimated 0.4, and then shifted their estimate to anywhere in the 0.2 to 0.6 range, we can assume that a bell curve centered around 0.5 is a good representation of this probability. 
+
+b. Beta(5, 2) because this represents a right-skewed model. Since the mean estimate is 0.8 with a low variance (0.05), this right skewed model with a peak towards pi==0.8 seems to be the best fit. 
+
+c. Beta(5, 1.5) because this represents a right-skewed model. Since the mean estimate is 0.9 with a range between 0.85 and 1, this right skewed model with a peak towards pi==0.9 seems to be the best fit. 
+
+d. Beta(0.5, 0.5): this yields a distribution with 2 peaks, one close to 0 and the other close to 1.
+
+## Excercise 3.2
+
+a. Beta(5, 2) because this represents a right-skewed model. Since the mean estimate is 0.8 with a range between 0.7 and 0.9, this right skewed model with a peak towards pi==0.8 seems to be the best fit. 
+
+b. Beta(5, 1.5) because this represents a right-skewed model. Since the mean estimate is 0.9 with a range between 0.85 and 1, this right skewed model with a peak towards pi==0.9 seems to be the best fit. 
+
+c.  Beta(5, 1.57) because this represents a right-skewed model. Since the mean estimate is 0.85 with a range between 0.75 and 0.95, this right skewed model with a peak towards pi==0.85 seems to be the best fit.  
+
+d. Beta(2.85,5) because this represents a slightly left-skewed model. Since the mean estimate is 0.3 with a high level of variance, this left skewed model with a peak towards pi==0.3 seems to be the best fit.  
+
+## Exercise 3.3
+
+a. Beta(1, 1). 
+```{r}
+library(bayesrules)
+library(tidyverse)
+b <- plot_beta(1, 1)
+b
+```
+
+
+b. The mean is 0.5. This aligns with having no clue about f(pi) because if you have no idea whether f(pi) is skewed more towards 1 or 0, its most likely going to be in the middle.
+
+c. First, we'll calculate variance and then we'll calculate SD.
+```{r}
+a <- 1
+b <- 1
+var <- a*b/((a+b)^2*(a+b+1))
+sd <- (var)^(1/2)
+sd
+```
+d. Beta(1, 5) yields a smaller SD than the previous model:
+```{r}
+a <- 1
+b <- 5
+var <- a*b/((a+b)^2*(a+b+1))
+sd <- (var)^(1/2)
+sd
+```
+
+e. Beta(0.5, 0.5) yields a larger SD than the previous model:
+```{r}
+a <- 0.5
+b <- 0.5
+var <- a*b/((a+b)^2*(a+b+1))
+sd <- (var)^(1/2)
+sd
+```
+
+## Exercise 3.4
+
+a. Beta(0.5, 0.5)
+b. Beta(2, 2)
+c. Beta(6, 2)
+d. Beta(1, 1)
+e. Beta(0.5, 6)
+f. Beta(2, 2)
+
+## Excercise 3.5
+
+a. Beta(1, 0.3)
+b. Beta(3, 3)
+c. Beta(6,3)
+d. Beta(2, 1)
+e. Beta(5, 6)
+f. Beta(4, 2)
+
+## Exercise 3.6
+
+a. Smallest mean: graph e (graph and calculations shown below)
+```{r}
+a <- 0.5
+b <- 6
+
+plot <- plot_beta(a, b)
+plot
+```
+```{r}
+mean <- a/(a+b)
+mean
+```
+
+Largest mean: graph c (graph and calculations shown below)
+```{r}
+a <- 6
+b <- 2
+
+plot <- plot_beta(a, b) 
+plot
+```
+
+```{r}
+mean <- a/(a+b)
+mean
+```
+
+b. Smallest mode: graph e (graph and calculations shown below)
+
+```{r}
+a <- 0.5
+b <- 6
+
+plot <- plot_beta(a, b) 
+plot
+```
+
+```{r}
+mode <- (a-1)/(a+b-2)
+mode
+```
+
+
+Largest mode: graph c (graph and calculations shown below)
+```{r}
+a <- 6
+b <- 2
+
+plot <- plot_beta(a, b) 
+plot
+```
+
+```{r}
+mode <- (a-1)/(a+b-2)
+mode
+```
+
+c. Smallest SD: graph c (graph and calculations shown below)
+```{r}
+a <- 0.5
+b <- 6
+
+plot <- plot_beta(a, b) 
+plot
+```
+```{r}
+a <- 0.5
+b <- 6
+var <- a*b/((a+b)^2*(a+b+1))
+sd <- (var)^(1/2)
+sd
+```
+
+
+Largest SD: graph a (graph and calculations shown below)
+```{r}
+a <- 0.5
+b <- 0.5
+
+plot <- plot_beta(a, b) 
+plot
+```
+```{r}
+var <- a*b/((a+b)^2*(a+b+1))
+sd <- (var)^(1/2)
+sd
+```
+
+## Exercise 3.7
+a. Plotting and summarizing graph a
+```{r}
+a <- 0.5
+b <- 0.5
+
+plot <- plot_beta(a, b) 
+plot
+data <- summarize_beta(a, b)
+data
+```
+
+b. Plotting and summarizing graph b
+```{r}
+a <- 2
+b <- 2
+
+plot <- plot_beta(a, b) 
+plot
+data <- summarize_beta(a, b)
+data
+```
+c. Plotting and summarizing graph c
+```{r}
+a <- 6
+b <- 2
+
+plot <- plot_beta(a, b) 
+plot
+data <- summarize_beta(a, b)
+data
+```
+d. Plotting and summarizing graph d
+```{r}
+a <- 1
+b <- 1
+
+plot <- plot_beta(a, b) 
+plot
+data <- summarize_beta(a, b)
+data
+```
+e. Plotting and summarizing graph e
+```{r}
+a <- 0.5
+b <- 6
+
+plot <- plot_beta(a, b) 
+plot
+data <- summarize_beta(a, b)
+data
+```
+f. Plotting and summarizing graph f
+```{r}
+a <- 2
+b <- 2
+
+plot <- plot_beta(a, b) 
+plot
+data <- summarize_beta(a, b)
+data
+```
+
+## Exercise 3.8 
+
+## Exercise 3.9
+
+a. Calculating summary statistics for both prior models:
+
+Calculating summary statistics for first person (Beta(8, 2)):
+
+```{r}
+a <- 8
+b <- 2
+
+data <- summarize_beta(a, b)
+data
+```
+Calculating summary statistics for second person (Beta(1, 20)):
+
+```{r}
+a <- 1
+b <- 20
+
+data <- summarize_beta(a, b)
+data
+```
+b. Building prior pdf plots for both models
+Calculating plot for first person (Beta(8, 2)):
+
+```{r}
+a <- 8
+b <- 2
+
+plot <- plot_beta(a, b)
+plot
+```
+
+Calculating plot for first person (Beta(1, 20)):
+
+```{r}
+a <- 1
+b <- 20
+
+plot <- plot_beta(a, b)
+plot
+```
+c. The second person thinks that a much lower proportion of US residents say "pop"; the first person thinks a much higher proportion of US residents say "pop," with a higher degree of variance. 
+
+## Exercise 3.10
+
+a. For 12 "pop" sayers, we can construct the following model:
+```{r}
+data <- summarize_beta_binomial(8, 2, 12, 50)
+data
+```
+Therefore, we have the new posterior model for the first salesperson:
+
+$$ \pi|(y=12) \text{~}  Beta(20, 40) $$
+For the second person, we can use similar calculations:
+```{r}
+data <- summarize_beta_binomial(1, 20, 12, 50)
+data
+```
+Therefore, we have the new posterior model for the second salesperson:
+
+$$ \pi|(y=12) \text{~}  Beta(13, 58) $$
+
+b. Plot the prior pdf, likelihood function, and posterior pdf for both salespeople.
+
+For salesperson 1, the graphs are as follows:
+```{r}
+
+plot_beta_binomial(20, 40, 12, 50)
+
+```
+
+For salesperson 2, the graphs are as follows:
+```{r}
+plot_beta_binomial(13, 58, 12, 50)
+
+```
+c. Both people's understandings of the distribution of pi were adjusted; the first sales person's more than the second. The first person's graph was shifted significantly more leftward (because they had overestimated the mean relative to the observed data); the second person's graph was shifted slightly more rightward (because they had underestimated the mean relative to the observed data).
+
+## Exercise 3.11
+
+a. Beta(2, 5): this model has a mean around 0.25, and a mode close to 0.2 (5/22=0.22).
+
+```{r}
+plot_beta(2, 5)
+```
+b. Calculating the posterior model:
+```{r}
+data <- summarize_beta_binomial(2, 5, 15, 50)
+data
+```
+Therefore, we have the following posterior model:
+
+$$ \pi|(y=15) \text{~}  Beta(17, 40) $$
+c. Mean: 0.298; mode: 0.29; SD: 0.06
+
+d. The observed data (15 out of 50 regular riders) yields an average of 15/50=0.3. The posterior model's mean is 0.298, and the prior model's mean is 0.286. The posterior model's mean is thus closer to that of the data than the prior model, so the posterior model more closely reflects the data. 
+
+## Exercise 3.12
+
+a. Beta(1.7, 5); this is a left-skewed model, with a mean close to 15%.
+
+```{r}
+plot_beta(1.7,5)
+```
+b. Calculating the posterior model:
+
+```{r}
+data <- summarize_beta_binomial(1.7, 5, 30, 90)
+data
+```
+$$ \pi|(y=30) \text{~}  Beta(31.7, 65) $$
+c. Mean: 0.328, mode: 0.324, SD: 0.05
+
+d. The observed data yields an average of 30/90=0.33. The prior model's mean is 0.254, and the posterior model's mean is 0.328. Therefore, the posterior model more closely resembles the data than the prior model, since 0.328 is much closer to 0.33 than 0.254.
+
+## Exercise 3.13
+
+a. Beta(4, 5); slightly left skewed with a mean around 0.4 and a moderate range of variation from 0.3 to 0.6 around the mean.
+```{r}
+plot_beta(4, 5)
+```
+b. Calculating and plotting the posterior model:
+
+```{r}
+data <- summarize_beta_binomial(4, 5, 80, 200)
+data
+```
+$$ \pi|(y=80) \text{~}  Beta(84, 125) $$
+The corresponding plot for this posterior is as follows:
+```{r}
+plot_beta_binomial(84, 125, 80, 200)
+```
+c. Mean: 0.41, Mode: 0.4, SD: 0.034
+
+d. The prior model and posterior are pretty closely aligned in their mode, but their means differ because the variation in the prior model is larger than in the prior model (the SD in the posterior model is about 1/3 of the prior model's SD). Therefore, the posterior model has a longer and thinner peak around the mean, while prior model has a shorter, squatter peak around the mean. 
+
+## Exercise 3.14 
+We know:
+
+$$ \pi | (Y=y) = Beta(\alpha + y, \beta +n - y)$$
+Therefore, we can solve for n and y:
+```{r}
+#prior alpha and beta
+a <- 2
+b <- 3
+
+#posterior alpha and beta
+a_1 <- 11
+b_1 <- 24
+
+y <- a_1 - a
+n <- b_1-b+y
+y
+n
+```
+
+Therefore, we would enter the following inputs to the function: summarize_beta_binomial(2, 3, 9, 30)
+
+## Exercise 3.15
+
+We know:
+
+$$ \pi | (Y=y) = Beta(\alpha + y, \beta +n - y)$$
+Therefore, we can solve for n and y:
+```{r}
+#prior alpha and beta
+a <- 1
+b <- 2
+
+#posterior alpha and beta
+a_1 <- 100
+b_1 <- 3
+
+y <- a_1 - a
+n <- b_1-b+y
+y
+n
+```
+Therefore, we would enter the following inputs to the function: summarize_beta_binomial(2, 3, 9, 30)
+
+## Exercise 3.16
+
+a. The prior model is strongly right-skewed, with minimal variation and a mean around 1. The likelihood is left skewed with a mean around 0.25. 
+
+b. The posterior is between the prior and the likelihood functions, with a mean and mode around 0.75. The posterior model more closely resembles the prior model than the data, since its mean is closer to that of the prior data than that of the likelihood function.
+
+c. I would use the following command to produce this plot: plot_beta_binomial(5, 0.6, 1, 4), which assures a right skewed prior and a likelihood with a mean around 0.25.
+
+
+## Exercise 3.17
+
+a. The prior is symmetric with a mean and mode around 0.5. Given its symmetry, I would guess alpha and beta are equal. The likelihood function is significantly more left-skewed with a mode around 0.125. It has significantly less variation, and therefore a much steeper peak. 
+
+b. The posterior model more closely resembles the likelihood function than the prior model. It is also narrow, steep and left-skewed, with a mode that is slightly larger than the likelihood's mode. The posterior model more closely resembles the data than the prior model, because its mean and mode are closer to those of the likelihood function than those of the prior model.
+
+c. I would use the following command to produce this plot: plot_beta_binomial(2, 2, 1, 8), which assures a symmetric prior and a likelihood with a mean around 0.125.
+
+## Exercise 3.18 
+
+a. Summarizing Patrick's data:
+```{r}
+summarize_beta_binomial(3,3,30, 40)
+```
+Plotting Patrick's data:
+```{r}
+plot_beta_binomial(3,3, 30, 40)
+```
+b. Summarizing Harold's data:
+```{r}
+summarize_beta_binomial(3,3,15, 20)
+```
+Plotting Harold's data:
+```{r}
+plot_beta_binomial(3,3, 15, 20)
+```
+
+c. The posterior models are very similar, but the peak of Patrick's is greater than the peak of Harold's. This makes sense given that Patrick has a bigger sample size than Harold. Patrick's also demonstrates a slightly lower SD than Harold's. This also makes sense, given that their sample sizes have the same ratio (0.75), but Patrick's is larger, so the deviation in his sample would be lower. The mean for Harold's model is also slightly lower than that of Patrick's, which makes sense given that the numerator in the average calculation for Patrick's model grows in greater proportion than the denominator relative to Harold's model. 
+

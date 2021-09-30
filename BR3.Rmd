@@ -26,19 +26,19 @@ quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
 plot_beta(alpha, beta)
 ```
 
-b. Beta(800, 200) because this represents a model with a mean at 0.8 and a majority of values (90%) within 0.05 of eachother (5th percentile==0.779, 95th percentile==0.82).
+b. Beta(0.8, 1.2) because this represents a model with a mean at 0.8 and a variance of 0.05. 
 
 ```{r}
 p <- 0.8
-n <- 1000
+n <- 2
   
 alpha <- p*n
 beta <- n*(1-p)
-quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+summarize_beta(alpha, beta)
 
 plot_beta(alpha, beta)
 ```
-
 
 c. Beta(36, 4) because this represents a model with a mean at 0.9 and a majority of values  within 0.85 to 1 (10th percentile==0.84, 95th percentile==0.97).
 ```{r}
@@ -68,17 +68,17 @@ alpha <- p*n
 beta <- n*(1-p)
 quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
 
-plot_beta(alpha, beta)
+summarize_beta(alpha, beta)
 ```
 
-b. Beta(90, 10) because this represents a model with a mean at 0.9 and a majority of values within 0.05 of the mean (5th percentile==0.85, 95th percentile==0.944).
+b. Beta(0.9, 0.9) because this represents a model with a mean at 0.9 and a variance close to 0.08 (variance==0.05).
 ```{r}
 p <- 0.9
-n <- 100
+n <- 0.9
   
 alpha <- p*n
 beta <- n*(1-p)
-quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+summarize_beta(alpha, beta)
 
 plot_beta(alpha, beta)
 ```

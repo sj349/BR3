@@ -14,21 +14,42 @@ library(tidyverse)
 
 ## Excercise 3.1
 
-a. Beta(5, 5) because this represents a bell curve with the mean centered around 0.5. Since the friend first estimated 0.4, and then shifted their estimate to anywhere in the 0.2 to 0.6 range, we can assume that a bell curve centered around 0.5 is a good representation of this probability. 
+a. Beta(8, 12) because this represents a bell curve with the mean centered around 0.4, with 90% of values (from the 5th to 95h percentile) lying between 0.23 and 0.58. Since the friend first estimated 0.4, and then shifted their estimate to anywhere in the 0.2 to 0.6 range, a curve with a mean at 0.4 and a majority range between 0.2 and 0.6 accurately reflects their prior. 
 ```{r}
-plot_beta(5, 5)
+p <- 0.4
+n <- 20
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
-b. Beta(5, 2) because this represents a right-skewed model. Since the mean estimate is 0.8 with a low variance (0.05), this right skewed model with a peak towards pi==0.8 seems to be the best fit. 
+b. Beta(800, 200) because this represents a model with a mean at 0.8 and a majority of values (90%) within 0.05 of eachother (5th percentile==0.779, 95th percentile==0.82).
 
 ```{r}
-plot_beta(5, 2)
+p <- 0.8
+n <- 1000
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
 
-c. Beta(5, 1.5) because this represents a right-skewed model. Since the mean estimate is 0.9 with a range between 0.85 and 1, this right skewed model with a peak towards pi==0.9 seems to be the best fit. 
+c. Beta(36, 4) because this represents a model with a mean at 0.9 and a majority of values  within 0.85 to 1 (10th percentile==0.84, 95th percentile==0.97).
 ```{r}
-plot_beta(5, 1.5)
+p <- 0.9
+n <- 40
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05,0.1, 0.9, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
 d. Beta(0.5, 0.5): this yields a distribution with 2 peaks, one close to 0 and the other close to 1.
@@ -38,24 +59,52 @@ plot_beta(0.5, 0.5)
 
 ## Excercise 3.2
 
-a. Beta(5, 2) because this represents a right-skewed model. Since the mean estimate is 0.8 with a range between 0.7 and 0.9, this right skewed model with a peak towards pi==0.8 seems to be the best fit. 
+a. Beta(40, 10) because this represents a model with a mean at 0.8 and a majority of values within 0.7 to 0.9 (5th percentile==0.6997, 95th percentile==0.885).
 ```{r}
-plot_beta(5, 2)
+p <- 0.8
+n <- 50
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
-b. Beta(5, 1.5) because this represents a right-skewed model. Since the mean estimate is 0.9 with a range between 0.85 and 1, this right skewed model with a peak towards pi==0.9 seems to be the best fit. 
+b. Beta(90, 10) because this represents a model with a mean at 0.9 and a majority of values within 0.05 of the mean (5th percentile==0.85, 95th percentile==0.944).
 ```{r}
-plot_beta(5, 1.5)
+p <- 0.9
+n <- 100
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
-c.  Beta(5, 1.57) because this represents a right-skewed model. Since the mean estimate is 0.85 with a range between 0.75 and 0.95, this right skewed model with a peak towards pi==0.85 seems to be the best fit.  
+c. Beta(39.95, 7.05) because this represents a model with a mean at 0.85 and a majority of values within 0.75 to 0.95 (5th percentile==0.76, 95th percentile==0.93).
 ```{r}
-plot_beta(5, 1.57)
+p <- 0.85
+n <- 47
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
-d. Beta(2.85,5) because this represents a slightly left-skewed model. Since the mean estimate is 0.3 with a high level of variance, this left skewed model with a peak towards pi==0.3 seems to be the best fit.  
+d. Beta(3, 7) because this represents a model with a mean at 0.3 and a high degree of variance (5th percentile==0.1, 95th percentile==0.55)
 ```{r}
-plot_beta(2.85, 5)
+p <- 0.3
+n <- 10
+  
+alpha <- p*n
+beta <- n*(1-p)
+quantile(rbeta(10000, alpha, beta), c(0.05, 0.95))
+
+plot_beta(alpha, beta)
 ```
 
 ## Exercise 3.3
@@ -69,7 +118,7 @@ b
 ```
 
 
-b. The mean is 0.5. This aligns with having no clue about f(pi) because if you have no idea whether f(pi) is skewed more towards 1 or 0, its most likely going to be in the middle.
+b. The mean is 0.5. This aligns with having no clue about the likely range of pi, because pi is equally likely (probability==1) across 0 to 1. 
 
 c. First, we'll calculate variance and then we'll calculate SD.
 ```{r}
@@ -267,8 +316,6 @@ plot
 data <- summarize_beta(a, b)
 data
 ```
-
-## Exercise 3.8 
 
 ## Exercise 3.9
 
